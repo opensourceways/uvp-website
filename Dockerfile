@@ -1,8 +1,11 @@
-FROM node:lts-alpine
+FROM bitnami/git
+RUN git clone https://github.com/opensourceways/uvp-website.git -b BRANCH
 
-RUN mkdir -p /app
-WORKDIR /app
-COPY . /app
+FROM node:lts-alpine
+WORKDIR /uvp-website
+COPY --from=0 /uvp-website /uvp-website
+
+ENV NODE_OPTIONS="--openssl-legacy-provider"
 
 RUN npm config set registry https://registry.npmmirror.com/ \
     && npm install -g @vue/cli \
