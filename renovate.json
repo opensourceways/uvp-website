@@ -2,5 +2,20 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base"
+  ],
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "groupName": "major"
+    },
+    {
+      "matchLanguages": ["js"],
+      "groupName": "js"
+    },
+    {
+      "matchPaths": [".github/workflows/**"],
+      "groupName": "workflows"
+    }
   ]
 }
