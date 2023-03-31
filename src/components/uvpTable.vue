@@ -30,7 +30,7 @@
             <span v-else @click="cellClick(item, scope.row)">{{ scope.row[item.prop] }}</span>
           </div>
           <template v-else-if="item.type === 'arrayInline'">
-            <el-tooltip placement="top" v-if="scope.row[item.prop]">
+            <el-tooltip placement="top" v-if="scope.row[item.prop] && scope.row[item.prop].length">
               <template #content>
                 <div v-for="(cell, cellIndex) in scope.row[item.prop]" :key="cellIndex">
                   <div v-if="cellIndex < 3">{{ cell }}</div>
@@ -41,12 +41,15 @@
             <span v-else>--</span>
           </template>
           <div v-else-if="item.type === 'arrayBlock'" style="width: 100%; line-height: 30px;">
-            <div v-for="(cell, cellIndex) in scope.row[item.prop]" :key="cellIndex">
-              {{ cell }}
-            </div>
+            <template v-if="scope.row[item.prop] && scope.row[item.prop].length">
+              <div v-for="(cell, cellIndex) in scope.row[item.prop]" :key="cellIndex">
+                {{ cell }}
+              </div>
+            </template>
+            <span v-else>--</span>
           </div>
           <template v-else-if="item.type === 'arrayCollapse'">
-            <div v-if="scope.row[item.prop]" class="arrayCollapse">
+            <div v-if="scope.row[item.prop] && scope.row[item.prop].length" class="arrayCollapse">
               <div class="collapseImg" @click="() => { scope.row.showAll = !scope.row.showAll }">
                 <img 
                   v-if="scope.row[item.prop].length > 5"
@@ -78,7 +81,7 @@
           </div>
           <div 
             v-else-if="item.hasTxtColor" 
-            :class="[scope.row[item.colorProp]? 'green' : 'red']"
+            :class="[scope.row[item.colorProp] === true ? 'green' : scope.row[item.colorProp] === false ? 'red' : '']"
             >
             {{ scope.row[item.prop] || '--' }}
           </div>

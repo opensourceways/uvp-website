@@ -6,12 +6,14 @@ export const SERVER_API_HOST = process.env.VUE_APP_SERVER_API_HOST;
 console.log("VUE_APP_SERVER_API_HOST:" + SERVER_API_HOST)
 
 const apiClient: AxiosInstance = axios.create({
-  baseURL: "/api",
+  // baseURL: "/api",
   //  baseURL: "https://uvp.test.osinfra.cn/uvp-api",
-   headers: {
-     // "Content-type": "application/json",
-     hideLoading: false
-   },
+  baseURL: SERVER_API_HOST + `/uvp-api`,
+
+  headers: {
+    // "Content-type": "application/json",
+    hideLoading: false
+  },
 });
 
 
