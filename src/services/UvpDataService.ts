@@ -1,5 +1,5 @@
 import http from "@/http-common";
-class SbomDataService {
+class UvpDataService {
   queryVulnerability(data: any): Promise<any> {
     return http({
       url: `/search`,
@@ -12,4 +12,4 @@ class SbomDataService {
   }
 }
 
-export default new SbomDataService();
+export default new UvpDataService();
