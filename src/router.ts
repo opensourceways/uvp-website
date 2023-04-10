@@ -20,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/about",
     name: "about",
     component: () => import("@/views/about/index.vue"),
+  },
+  {
+    path: "/api",
+    name: "api",
+    component: () => import("@/views/about/api.vue"),
   }
 ];
 

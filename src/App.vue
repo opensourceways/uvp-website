@@ -1,7 +1,7 @@
 <template>
   <el-config-provider :locale="locale">
     <div id="app">
-      <div class="header">
+      <div class="header" v-if="isShow">
         <div class="logo">
           <div class="txt" @click="goPath({path: '/'})">
             <img src="@/assets/images/logo.png" alt="">
@@ -53,8 +53,7 @@ export default defineComponent({
       ],
       activeName: this.$route.name || '',
       isShow: false,
-      thirdPart: false,
-      locale: zhCn
+      locale: zhCn,
     }
   },
   computed:{
@@ -68,16 +67,19 @@ export default defineComponent({
         path: nav.path
       })
     },
-    ...mapMutations(['setIsThirdPart'])
+    ...mapMutations([])
 
   },
   watch: {
     $route: {
       deep: true,
       handler(route) {
-        this.activeName = route.name || ''
-      }
-    },
+        this.isShow = !route.path.includes('api') 
+        if(this.isShow) {
+          this.activeName = route.name || ''
+        }
+      },
+    }
   },
 
   provide() {

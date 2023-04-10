@@ -7,7 +7,7 @@
             UVP(统一漏洞平台，Unified Vulnerability Platform)聚合多漏洞源数据，以<span @click="goPath(ssfHref)">OpenSSF OSV</span>格式为项目提供开源软件漏洞检索和诊断服务
           </div>
           <div class="btns">
-            <el-button type="primary" v-for="(btn, index) in btns" :key="index" @click="goPath(btn.href)">
+            <el-button type="primary" v-for="(btn, index) in btns" :key="index" @click="goPath(btn.href, btn.type)">
               {{ btn.label }}
             </el-button>
           </div>
@@ -20,7 +20,7 @@
     <div class="bottomPart">
       <div class="img">
         <div class="txt">服务架构图</div>
-        <img src="@/assets/images/aboutOrg.png" alt="">
+        <img src="@/assets/images/aboutOrg1.png" alt="">
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@ export default defineComponent({
       btns: [
         { label: '源代码', href: 'https://github.com/opensourceways/uvp' },
         { label: '文档', href: 'https://github.com/opensourceways/uvp/blob/main/README.md' },
-        { label: 'API', href: '/aboutApi.html' },
+        { label: 'API', href: '/api', type: 'api' },
       ]
     };
   },
@@ -49,8 +49,15 @@ export default defineComponent({
   watch: {
   },
   methods: {
-    goPath(info) {
-      window.open(info, '_blank')
+    goPath(info, type) {
+      let url = info
+      if(type && type === 'api') {
+        const { href } = this.$router.resolve({
+          path: info,
+        })
+        url = href
+      }
+      window.open(url, '_blank')
     }
   },
 });
@@ -64,7 +71,7 @@ export default defineComponent({
     border-radius: 4px;
     height: 340px;
     .main{
-      width: 1200px;
+      width: 1260px;
       height: 100%;
       margin: 0 auto;
       display: flex;
@@ -76,8 +83,8 @@ export default defineComponent({
           font-weight: bold;
           color: #000000;
           line-height: 39px;
-          width: 700px;
-          word-spacing: 20px;
+          width: 690px;
+          word-spacing: 8px;
           span{
             color: #4971FF;
             cursor: pointer;
@@ -112,7 +119,7 @@ export default defineComponent({
     background-color: #fff;
     width: 100%;
     .img{
-      width: 1200px;
+      width: 1260px;
       margin: 0 auto;
       .txt{
         font-size: 16px;
@@ -122,7 +129,7 @@ export default defineComponent({
       }
     }
     img{
-      // width: 100%;
+      width: 100%;
     }
   }
 }
