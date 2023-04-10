@@ -15,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/vulnerabilityDetail",
     name: "vulnerabilityDetail",
     component: () => import("@/views/VulnerabilityQuery/detail.vue"),
+  },
+  {
+    path: "/about",
+    name: "about",
+    component: () => import("@/views/about/index.vue"),
   }
 ];
 

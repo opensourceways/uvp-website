@@ -2,9 +2,13 @@
   <el-config-provider :locale="locale">
     <div id="app">
       <div class="header">
-        <router-link to="/">
-          <img src="@/assets/images/logo.png" alt="">
-        </router-link>
+        <div class="logo">
+          <div class="txt" @click="goPath({path: '/'})">
+            <img src="@/assets/images/logo.png" alt="">
+            <span>Unified Vulnerability Platform</span> 
+          </div>
+        </div>
+        
         <div class="navList">
           <div 
             v-for="(nav,navIndex) in navList"
@@ -44,7 +48,8 @@ export default defineComponent({
       Expand: Expand,
       useRouter: useRouter,
       navList: [
-        { label: '漏洞查询', path: '/vulnerabilityQuery', value: 'vulnerabilityQuery' }
+        { label: '漏洞库', path: '/vulnerabilityQuery', value: 'vulnerabilityQuery' },
+        { label: '关于', path: '/about', value: 'about' },
       ],
       activeName: this.$route.name || '',
       isShow: false,
@@ -70,7 +75,7 @@ export default defineComponent({
     $route: {
       deep: true,
       handler(route) {
-        //
+        this.activeName = route.name || ''
       }
     },
   },
@@ -97,6 +102,24 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
+    .logo{
+      height: 100%;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid #000000;
+      padding-right: 30px;
+      .txt{
+        display: flex;
+        align-items: flex-end;
+        cursor: pointer;
+        span{
+          font-size: 12px;
+          font-weight: 600;
+          color: #4971FF;
+          margin-left: 15px;
+        }
+      }
+    }
     .navList{
       width:calc(100% - 320px);
       display: flex;
@@ -106,29 +129,20 @@ export default defineComponent({
         min-width: 60px;
         text-align: center;
         font-size: 16px;
-        // font-weight: bold;
+        font-weight: bold;
         color: #ffffff;
         cursor: pointer;
+        margin-right: 80px;
         .Bottomborder{
           height: 3px;
           background-color: transparent;
           width: 30px;
           margin: 10px auto 0;
         }
-        .link{
-          color: #ffffff;
-          // opacity: 0.5;
-          opacity: 1;
+        &:hover,
+        &.active{
+          color: #819DFF;
         }
-        // &:hover,
-        // &.active{
-        //   .link{
-        //     opacity: 1;
-        //   }
-        //   .Bottomborder{
-        //     background-color: #fff;
-        //   }
-        // }
       }
     }
   }
