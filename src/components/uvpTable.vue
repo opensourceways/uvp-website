@@ -77,15 +77,15 @@
             v-else-if="item.hasBgcolor" 
             :class="['bgColor', scope.row[item.colorProp]]"
           >
-            {{ scope.row[item.prop] || '--' }}
+            {{ formatValue(scope.row[item.prop]) }}
           </div>
           <div 
             v-else-if="item.hasTxtColor" 
             :class="[scope.row[item.colorProp] === true ? 'green' : scope.row[item.colorProp] === false ? 'red' : '']"
             >
-            {{ scope.row[item.prop] || '--' }}
+            {{ formatValue(scope.row[item.prop]) }}
           </div>
-          <span v-else>{{ scope.row[item.prop]  || '--' }}</span>
+          <span v-else>{{ formatValue(scope.row[item.prop]) }}</span>
         </template>
       </el-table-column>
     </template>
@@ -133,6 +133,13 @@ export default defineComponent({
           data: rowInfo
         }
         this.$emit(item.fnName, res)
+      }
+    },
+    formatValue(val) {
+      if(val || val === 0) {
+        return val
+      } else {
+        return '--'
       }
     }
   }
