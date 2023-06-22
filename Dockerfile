@@ -1,7 +1,7 @@
 FROM bitnami/git
 RUN git clone https://github.com/opensourceways/uvp-website.git -b BRANCH
 
-FROM node:lts-alpine@sha256:f1402c1609f978154461781b76e634e7010756f9b212f601fba89c42366bc3e2
+FROM node:lts-alpine@sha256:d5b2a7869a4016b1847986ea52098fa404421e44281bb7615a9e3615e07f37fb
 WORKDIR /uvp-website
 COPY --from=0 /uvp-website /uvp-website
 
